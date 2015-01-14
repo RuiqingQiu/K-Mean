@@ -12,13 +12,16 @@ pylab.close()
 path_to_image = '/Users/ruiqingqiu/Desktop/kmeans.png'
 # generate 3 sets of normally distributed points around
 # different means with different variances
-pt1 = numpy.random.normal(1, 0.2, (100,2))
-pt2 = numpy.random.normal(2, 0.5, (300,2))
-pt3 = numpy.random.normal(3, 0.2, (200,2))
+# pt1 = numpy.random.normal(1, 0.2, (100,2))
+# pt2 = numpy.random.normal(2, 0.5, (300,2))
+# pt3 = numpy.random.normal(3, 0.2, (200,2))
+pt1 = numpy.random.normal(1, 0.2, (20,2))
+pt2 = numpy.random.normal(2, 0.5, (10,2))
+pt3 = numpy.random.normal(3, 0.2, (10,2))
 
 # slightly move sets 2 and 3 (for a prettier output)
-pt2[:,0] += 1
-pt3[:,0] -= 0.5
+#pt2[:,0] += 1
+#pt3[:,0] -= 0.5
 
 xy = numpy.concatenate((pt1, pt2, pt3))
 
