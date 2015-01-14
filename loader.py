@@ -53,6 +53,8 @@ class MNIST(object):
                     'got %d' % magic)
 
             image_data = array("B", file.read())
+        # image data, same as 151
+        print image_data
 
         images = []
         for i in xrange(size):
