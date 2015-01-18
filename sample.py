@@ -15,6 +15,22 @@ def init_board(N):
     X = np.array([(random.uniform(-1, 1), random.uniform(-1, 1)) for i in range(N)])
     return X
 
+def init_board_gauss(N, k):
+    n = float(N)/k
+    X = []
+    for i in range(k):
+        c = (random.uniform(-1, 1), random.uniform(-1, 1))
+        s = random.uniform(0.05,0.5)
+        x = []
+        while len(x) < n:
+            a, b = np.array([np.random.normal(c[0], s), np.random.normal(c[1], s)])
+            # Continue drawing points from the distribution in the range [-1,1]
+            if abs(a) < 1 and abs(b) < 1:
+                x.append([a,b])
+        X.extend(x)
+    X = np.array(X)[:N]
+    return X
+
 path_to_image = '/Users/margaretwm3/Desktop/kmeans.png'
 # generate 3 sets of normally distributed points around
 # different means with different variances
@@ -32,7 +48,8 @@ path_to_image = '/Users/margaretwm3/Desktop/kmeans.png'
 #xy = numpy.concatenate((pt1, pt2, pt3))
 	
 #res, idx = kmeans2(numpy.array(zip(xy[:,0],xy[:,1])),5)
-dataSet = init_board(300); # create the initial configuration of the board
+#dataSet = init_board(300) # create the initial configuration of the board
+dataSet = init_board_gauss(300,3)
 print dataSet
 # kmeans for 5 clusters
 res, idx = kmeans2(dataSet,3)
