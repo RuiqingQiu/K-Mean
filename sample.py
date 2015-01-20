@@ -26,9 +26,9 @@ pt3 = numpy.random.normal(3, 0.2, (10,2))
 xy = numpy.concatenate((pt1, pt2, pt3))
 
 # kmeans for 3 clusters
-res, idx = kmeans2(numpy.array(zip(xy[:,0],xy[:,1])),5)
+res, idx = kmeans2(numpy.array(zip(xy[:,0],xy[:,1])),3)
 
-colors = ([([1,0,0],[0,1,0],[0,0,1],[1,1,0],[0,1,1])[i] for i in idx])
+colors = ([([1,0,0],[0,1,0],[0,0,1])[i] for i in idx])
 
 # plot colored points
 pylab.scatter(xy[:,0],xy[:,1], c=colors)
