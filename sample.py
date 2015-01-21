@@ -31,7 +31,7 @@ def init_board_gauss(N, k):
     X = np.array(X)[:N]
     return X
 
-path_to_image = '/Users/margaretwm3/Desktop/kmeans.png'
+path_to_image = '/Users/ruiqingqiu/Desktop/kmeans.png'
 # generate 3 sets of normally distributed points around
 # different means with different variances
 # pt1 = numpy.random.normal(1, 0.2, (100,2))
@@ -45,8 +45,10 @@ path_to_image = '/Users/margaretwm3/Desktop/kmeans.png'
 #pt2[:,0] += 1
 #pt3[:,0] -= 0.5
 
+
+#res, idx = kmeans2(numpy.array(zip(xy[:,0],xy[:,1])),3)
 #xy = numpy.concatenate((pt1, pt2, pt3))
-	
+
 #res, idx = kmeans2(numpy.array(zip(xy[:,0],xy[:,1])),5)
 #dataSet = init_board(300) # create the initial configuration of the board
 dataSet = init_board_gauss(300,3)
@@ -54,7 +56,7 @@ print dataSet
 # kmeans for 5 clusters
 res, idx = kmeans2(dataSet,3)
 
-colors = ([([1,0,0],[0,1,0],[0,0,1],[1,1,0],[0,1,1])[i] for i in idx])
+colors = ([([1,0,0],[0,1,0],[0,0,1])[i] for i in idx])
 
 # plot colored points
 pylab.scatter(dataSet[:,0],dataSet[:,1], c=colors)
