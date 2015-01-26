@@ -60,15 +60,17 @@ def init_board_gauss(N, k):
 def sequential_kmean(data, k):
     kmean_center = []
     idx = []
+    for i in range(0, len(data)):
+        idx.append(0)
     counts = []
     for i in range(k):
         counts.append(1)
     for i in range(k):
         kmean_center.append(data[i])
-        idx.append(i)
+        idx[i] = i
     kmean_center_np = np.array(kmean_center)
     index = k
-    while index < data.size/2:
+    while index < len(data):
         print index
         current_point = data[index]
         min_dist = 100000.0
@@ -78,45 +80,23 @@ def sequential_kmean(data, k):
             if dist < min_dist:
                 min_dist = dist
                 replace_position = i
+        idx[index] = replace_position
         index = index + 1
         kmean_center_np[replace_position] = ((counts[replace_position] * kmean_center_np[replace_position]) + current_point) / (counts[replace_position] + 1.0)
         counts[replace_position] = counts[replace_position] + 1
     return np.array(kmean_center), np.array(idx)
-'''
-def sequential_kmean(data, k):
-
-        current_point = data[index]
-        min_dist = 10000.0
-        replace_position = 0
-
-        for i in range(k):
-            dist = distance.euclidean(kmean_center_np[i],current_point)
-            if dist < min_dist:
-                min_dist = dist
-                replace_position = i
-                print "five"
-        index = index + 1
-        print "four"
-        kmean_center[replace_position] = ((counts[replace_position] * kmean_center_np[replace_position]) + current_point) / (counts[replace_position] + 1.0)
-        counts[replace_position] = counts[replace_position] + 1
-	print kmean_center
-    return np.array(kmean_center), np.array(idx)
-'''
-
 
 num_of_iteration = 1
 #res, idx = kmeans2(numpy.array(zip(xy[:,0],xy[:,1])),5)
 cluster_number = 3
-dataSet = init_board_gauss(100,cluster_number)
+dataSet = init_board_gauss(1000,cluster_number)
 error_list = []
 index = []
 for i in range(num_of_iteration):
-	print "here"
-	res, idx = sequential_kmean(dataSet,3)
-	error_list.append(error_calculate(3,true_center,res))
-	index.append(i)
-#plot_graph()
-
-
-
-
+    res, idx = sequential_kmean(dataSet,3)
+    print idx
+    error_list.append(error_calculate(3,true_center,res))
+    res, idx = kmeans2(dataSet,3)
+    error_list.append(error_calculate(3,true_center,res))
+    index.append(i)
+plot_graph()
