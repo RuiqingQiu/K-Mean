@@ -14,15 +14,15 @@ import pylab
 pylab.close()
 
 true_center = []
-#path_to_image = '/Users/margaretmw3/Desktop/kmeans.png'
-path_to_image = '/Users/ruiqingqiu/Desktop/kmeans.png'
+path_to_image = '/Users/margaretmw3/Desktop/kmeans.png'
+#path_to_image = '/Users/ruiqingqiu/Desktop/kmeans.png'
 
 # Taking in k clusters, true_center list, and the result center list
 def error_calculate(k,true_center,res):
     error = 0.0
     for i in range(k):
         min_dis = 1000000
-        for j in range(3):
+        for j in range(k):
             dst = distance.euclidean(true_center[i],res[j])
             if dst < min_dis:
                 min_dis = dst
@@ -65,15 +65,15 @@ def init_board_gauss(N, k):
     return X
 
 num_of_iteration = 1000
+cluster_number = 5
 #res, idx = kmeans2(numpy.array(zip(xy[:,0],xy[:,1])),5)
-dataSet = init_board_gauss(300,3)
+dataSet = init_board_gauss(300,cluster_number)
 error_list = []
 index = []
 for i in range(num_of_iteration):
-    res, idx = kmeans2(dataSet,3)
-    error_list.append(error_calculate(3,true_center,res))
+    res, idx = kmeans2(dataSet,cluster_number)
+    error_list.append(error_calculate(cluster_number,true_center,res))
     index.append(i)
-
 
 plt.plot(index,error_list,'ro')
 #plt.ylabel("error rate")
