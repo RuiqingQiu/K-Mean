@@ -22,7 +22,7 @@ def error_calculate(k,true_center,res):
     error = 0.0
     for i in range(k):
         min_dis = 1000000
-        for j in range(3):
+        for j in range(k):
             dst = distance.euclidean(true_center[i],res[j])
             if dst < min_dis:
                 min_dis = dst
@@ -64,19 +64,40 @@ def init_board_gauss(N, k):
     #print true_center
     return X
 
-num_of_iteration = 1000
+num_of_iteration = 100
 #res, idx = kmeans2(numpy.array(zip(xy[:,0],xy[:,1])),5)
-dataSet = init_board_gauss(300,3)
+cluster_number = 3
+dataSet = init_board_gauss(1000,cluster_number)
 error_list = []
 index = []
 for i in range(num_of_iteration):
+    print dataSet
     res, idx = kmeans2(dataSet,3)
+    print res
+    print idx
     error_list.append(error_calculate(3,true_center,res))
     index.append(i)
+error_list2 = []
+if 5 < cluster_number:
+    for i in range(num_of_iteration):
+        res, idx = kmeans2(dataSet,5)
+        error_list2.append(error_calculate(5,true_center,res))
+error_list3 = []
+if 10 < cluster_number:
+    for i in range(num_of_iteration):
+        res, idx = kmeans2(dataSet,10)
+        error_list3.append(error_calculate(10,true_center,res))
 
 
+
+#fig = plt.figure()
+#p1 = fig.add_subplot(211)
 plt.plot(error_list)
-#plt.plot(index,error_list,'ro')
+plt.plot(error_list2)
+plt.plot(error_list3)
+#plt.legend(['3','5','10'],loc='upper left')
+#p2 = fig.add_subplot(212)
+#p2.plot(index,error_list,'ro')
 #plt.ylabel("error rate")
 plt.show()
 plot_graph()
