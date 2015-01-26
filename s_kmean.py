@@ -85,27 +85,6 @@ def sequential_kmean(data, k):
         kmean_center_np[replace_position] = ((counts[replace_position] * kmean_center_np[replace_position]) + current_point) / (counts[replace_position] + 1.0)
         counts[replace_position] = counts[replace_position] + 1
     return np.array(kmean_center), np.array(idx)
-'''
-def sequential_kmean(data, k):
-
-        current_point = data[index]
-        min_dist = 10000.0
-        replace_position = 0
-
-        for i in range(k):
-            dist = distance.euclidean(kmean_center_np[i],current_point)
-            if dist < min_dist:
-                min_dist = dist
-                replace_position = i
-                print "five"
-        index = index + 1
-        print "four"
-        kmean_center[replace_position] = ((counts[replace_position] * kmean_center_np[replace_position]) + current_point) / (counts[replace_position] + 1.0)
-        counts[replace_position] = counts[replace_position] + 1
-	print kmean_center
-    return np.array(kmean_center), np.array(idx)
-'''
-
 
 num_of_iteration = 1
 #res, idx = kmeans2(numpy.array(zip(xy[:,0],xy[:,1])),5)
