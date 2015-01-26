@@ -96,5 +96,7 @@ for i in range(num_of_iteration):
     res, idx = sequential_kmean(dataSet,3)
     print idx
     error_list.append(error_calculate(3,true_center,res))
+    res, idx = kmeans2(dataSet,3)
+    error_list.append(error_calculate(3,true_center,res))
     index.append(i)
 plot_graph()
