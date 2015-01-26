@@ -75,7 +75,8 @@ for i in range(num_of_iteration):
     error_list.append(error_calculate(cluster_number,true_center,res))
     index.append(i)
 
-plt.plot(index,error_list,'ro')
+plt.plot(error_list)
+#plt.plot(index,error_list,'ro')
 #plt.ylabel("error rate")
 plt.show()
 plot_graph()
