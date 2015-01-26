@@ -9,8 +9,8 @@ import pylab
 pylab.close()
 
 true_center = []
-path_to_image = '/Users/margaretmw3/Desktop/kmeans.png'
 #path_to_image = '/Users/ruiqingqiu/Desktop/kmeans.png'
+path_to_image = '/Users/margaretwm3/Desktop/kmeans.png'
 
 # Taking in k clusters, true_center list, and the result center list
 def error_calculate(k,true_center,res):
