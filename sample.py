@@ -8,8 +8,11 @@ import random
 import numpy as np
 matplotlib.use('Agg')
 from scipy.cluster.vq import *
+from scipy.spatial import distance
 import pylab
 pylab.close()
+
+true_center = []
 
 def init_board(N):
     X = np.array([(random.uniform(-1, 1), random.uniform(-1, 1)) for i in range(N)])
@@ -20,6 +23,7 @@ def init_board_gauss(N, k):
     X = []
     for i in range(k):
         c = (random.uniform(-1, 1), random.uniform(-1, 1))
+        true_center.append([c[0],c[1]]) # remember the true center to calculate error
         s = random.uniform(0.05,0.5)
         x = []
         while len(x) < n:
@@ -29,9 +33,10 @@ def init_board_gauss(N, k):
                 x.append([a,b])
         X.extend(x)
     X = np.array(X)[:N]
+    print true_center
     return X
 
-path_to_image = '/Users/ruiqingqiu/Desktop/kmeans.png'
+path_to_image = '/Users/margaretmw3/Desktop/kmeans.png'
 # generate 3 sets of normally distributed points around
 # different means with different variances
 # pt1 = numpy.random.normal(1, 0.2, (100,2))
@@ -52,9 +57,24 @@ path_to_image = '/Users/ruiqingqiu/Desktop/kmeans.png'
 #res, idx = kmeans2(numpy.array(zip(xy[:,0],xy[:,1])),5)
 #dataSet = init_board(300) # create the initial configuration of the board
 dataSet = init_board_gauss(300,3)
-print dataSet
+#print dataSet
 # kmeans for 5 clusters
 res, idx = kmeans2(dataSet,3)
+print res
+
+error = 0.0
+# measure how good is the k-mean
+for i in range(3):
+    min_dis = 1000000
+    for j in range(3):
+        dst = distance.euclidean(true_center[i],res[j])
+        if dst < min_dis:
+            min_dis = dst
+    error += min_dis
+print error
+
+
+
 
 colors = ([([1,0,0],[0,1,0],[0,0,1])[i] for i in idx])
 
@@ -65,5 +85,5 @@ pylab.scatter(dataSet[:,0],dataSet[:,1], c=colors)
 pylab.scatter(res[:,0],res[:,1], marker='o', s = 500, linewidths=2, c='none')
 pylab.scatter(res[:,0],res[:,1], marker='x', s = 500, linewidths=2)
 #print "here"
-pylab.savefig(path_to_image)
+#pylab.savefig(path_to_image)
 
