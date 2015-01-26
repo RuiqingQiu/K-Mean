@@ -14,8 +14,8 @@ import pylab
 pylab.close()
 
 true_center = []
-path_to_image = '/Users/margaretmw3/Desktop/kmeans.png'
 #path_to_image = '/Users/ruiqingqiu/Desktop/kmeans.png'
+path_to_image = '/Users/margaretwm3/Desktop/kmeans.png'
 
 # Taking in k clusters, true_center list, and the result center list
 def error_calculate(k,true_center,res):
@@ -76,7 +76,6 @@ for i in range(num_of_iteration):
     print res
     print idx
     error_list.append(error_calculate(3,true_center,res))
->>>>>>> ce7ca97eaa4cb7f205f6f0c60d17bef64f3f0c10
     index.append(i)
 error_list2 = []
 if 5 < cluster_number:
@@ -89,13 +88,10 @@ if 10 < cluster_number:
         res, idx = kmeans2(dataSet,10)
         error_list3.append(error_calculate(10,true_center,res))
 
-<<<<<<< HEAD
-=======
 
 
 #fig = plt.figure()
 #p1 = fig.add_subplot(211)
->>>>>>> ce7ca97eaa4cb7f205f6f0c60d17bef64f3f0c10
 plt.plot(error_list)
 plt.plot(error_list2)
 plt.plot(error_list3)

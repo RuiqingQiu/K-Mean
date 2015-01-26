@@ -9,8 +9,8 @@ import pylab
 pylab.close()
 
 true_center = []
-#path_to_image = '/Users/margaretmw3/Desktop/kmeans.png'
-path_to_image = '/Users/ruiqingqiu/Desktop/kmeans.png'
+path_to_image = '/Users/margaretmw3/Desktop/kmeans.png'
+#path_to_image = '/Users/ruiqingqiu/Desktop/kmeans.png'
 
 # Taking in k clusters, true_center list, and the result center list
 def error_calculate(k,true_center,res):
@@ -62,6 +62,7 @@ def sequential_kmean(data, k):
     idx = []
     for i in range(0, len(data)):
         idx.append(0)
+    # set count n1 ... nk to 1
     counts = []
     for i in range(k):
         counts.append(1)
