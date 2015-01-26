@@ -60,7 +60,7 @@ def init_board_gauss(N, k):
 def sequential_kmean(data, k):
     kmean_center = []
     idx = []
-    for i in range(0, data.size/2):
+    for i in range(0, len(data)):
         idx.append(0)
     counts = []
     for i in range(k):
@@ -70,7 +70,7 @@ def sequential_kmean(data, k):
         idx[i] = i
     kmean_center_np = np.array(kmean_center)
     index = k
-    while index < data.size/2:
+    while index < len(data):
         print index
         current_point = data[index]
         min_dist = 100000.0
