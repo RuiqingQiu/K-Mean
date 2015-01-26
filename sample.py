@@ -75,7 +75,8 @@ for i in range(num_of_iteration):
     index.append(i)
 
 
-plt.plot(index,error_list,'ro')
+plt.plot(error_list)
+#plt.plot(index,error_list,'ro')
 #plt.ylabel("error rate")
 plt.show()
 plot_graph()
