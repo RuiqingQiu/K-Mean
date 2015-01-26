@@ -63,20 +63,45 @@ def init_board_gauss(N, k):
     X = np.array(X)[:N]
     #print true_center
     return X
-
-num_of_iteration = 1000
-cluster_number = 5
+    
+num_of_iteration = 100
 #res, idx = kmeans2(numpy.array(zip(xy[:,0],xy[:,1])),5)
-dataSet = init_board_gauss(300,cluster_number)
+cluster_number = 3
+dataSet = init_board_gauss(1000,cluster_number)
 error_list = []
 index = []
 for i in range(num_of_iteration):
-    res, idx = kmeans2(dataSet,cluster_number)
-    error_list.append(error_calculate(cluster_number,true_center,res))
+    print dataSet
+    res, idx = kmeans2(dataSet,3)
+    print res
+    print idx
+    error_list.append(error_calculate(3,true_center,res))
+>>>>>>> ce7ca97eaa4cb7f205f6f0c60d17bef64f3f0c10
     index.append(i)
+error_list2 = []
+if 5 < cluster_number:
+    for i in range(num_of_iteration):
+        res, idx = kmeans2(dataSet,5)
+        error_list2.append(error_calculate(5,true_center,res))
+error_list3 = []
+if 10 < cluster_number:
+    for i in range(num_of_iteration):
+        res, idx = kmeans2(dataSet,10)
+        error_list3.append(error_calculate(10,true_center,res))
 
+<<<<<<< HEAD
+=======
+
+
+#fig = plt.figure()
+#p1 = fig.add_subplot(211)
+>>>>>>> ce7ca97eaa4cb7f205f6f0c60d17bef64f3f0c10
 plt.plot(error_list)
-#plt.plot(index,error_list,'ro')
+plt.plot(error_list2)
+plt.plot(error_list3)
+#plt.legend(['3','5','10'],loc='upper left')
+#p2 = fig.add_subplot(212)
+#p2.plot(index,error_list,'ro')
 #plt.ylabel("error rate")
 plt.show()
 plot_graph()
