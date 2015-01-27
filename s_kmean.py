@@ -1,5 +1,6 @@
 import numpy
 import matplotlib
+import matplotlib.pyplot as plt
 import random
 import numpy as np
 matplotlib.use('Agg')
@@ -10,7 +11,7 @@ pylab.close()
 
 true_center = []
 #path_to_image = '/Users/ruiqingqiu/Desktop/kmeans.png'
-path_to_image = '/Users/margaretwm3/Desktop/kmeans.png'
+path_to_image = '/Users/margaretwm3/Desktop/s_kmeans.png'
 
 # Taking in k clusters, true_center list, and the result center list
 def error_calculate(k,true_center,res):
@@ -66,38 +67,52 @@ def sequential_kmean(data, k):
     counts = []
     for i in range(k):
         counts.append(1)
+
+    # set the first seen k points to the kmean center
     for i in range(k):
         kmean_center.append(data[i])
-        idx[i] = i
+        idx[i] = i   # remember which cluster
     kmean_center_np = np.array(kmean_center)
     index = k
+    # look at the next point, and do one pass through the dataset
     while index < len(data):
-        print index
+        # print index
         current_point = data[index]
         min_dist = 100000.0
         replace_position = 0
+
+        # find the distance to the nearest kmean center
         for i in range(k):
             dist = distance.euclidean(kmean_center_np[i], current_point)
             if dist < min_dist:
                 min_dist = dist
                 replace_position = i
+        # index is the current point       
         idx[index] = replace_position
         index = index + 1
+        # update the kmean center accordingly
         kmean_center_np[replace_position] = ((counts[replace_position] * kmean_center_np[replace_position]) + current_point) / (counts[replace_position] + 1.0)
+        # update the countes -> increase the weights
         counts[replace_position] = counts[replace_position] + 1
     return np.array(kmean_center), np.array(idx)
 
-num_of_iteration = 1
+num_of_iteration = 5
 #res, idx = kmeans2(numpy.array(zip(xy[:,0],xy[:,1])),5)
 cluster_number = 3
 dataSet = init_board_gauss(1000,cluster_number)
+error_list_s = []
 error_list = []
-index = []
+#index = []
 for i in range(num_of_iteration):
     res, idx = sequential_kmean(dataSet,3)
-    print idx
-    error_list.append(error_calculate(3,true_center,res))
+    # print idx
+    error_list_s.append(error_calculate(3,true_center,res))
     res, idx = kmeans2(dataSet,3)
     error_list.append(error_calculate(3,true_center,res))
-    index.append(i)
-plot_graph()
+    #index.append(i)
+
+plt.plot(error_list_s)
+plt.plot(error_list)
+plt.legend(['s_kmean','kmean'],loc='upper left')
+plt.show()
+#plot_graph()
