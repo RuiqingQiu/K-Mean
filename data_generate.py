@@ -23,9 +23,16 @@ class Data(object):
             x = []
             while len(x) < n:
                 # need to change dimension
-                a, b = np.array([np.random.normal(c[0], s), np.random.normal(c[1],s)])
-                if abs(a) < 1 and abs(b) < 1:
-                    x.append([a,b])
+                lst = []
+                for i in c:
+                    lst.append(np.random.normal(i,s))
+                point = np.array(lst)
+                good = True
+                for i in point:
+                    if abs(i) >= 1:
+                        good = False
+                if good:
+                    x.append(point)
             X.extend(x)
         X = np.array(X)[:self.N]
         return X
