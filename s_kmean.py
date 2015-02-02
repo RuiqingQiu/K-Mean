@@ -10,8 +10,8 @@ import pylab
 pylab.close()
 
 true_center = []
-#path_to_image = '/Users/ruiqingqiu/Desktop/kmeans.png'
-path_to_image = '/Users/margaretwm3/Desktop/s_kmeans.png'
+path_to_image = '/Users/ruiqingqiu/Desktop/s_kmeans.png'
+#path_to_image = '/Users/margaretwm3/Desktop/s_kmeans.png'
 
 # Taking in k clusters, true_center list, and the result center list
 def error_calculate(k,true_center,res):
@@ -87,7 +87,7 @@ def sequential_kmean(data, k):
             if dist < min_dist:
                 min_dist = dist
                 replace_position = i
-        # index is the current point       
+        # index is the current point
         idx[index] = replace_position
         index = index + 1
         # update the kmean center accordingly

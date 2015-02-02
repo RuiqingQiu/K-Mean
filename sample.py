@@ -12,11 +12,12 @@ from scipy.cluster.vq import *
 from scipy.spatial import distance
 import pylab
 pylab.close()
+from data_generate import Data
 
 true_center = []
-#path_to_image = '/Users/ruiqingqiu/Desktop/kmeans.png'
-path_to_image = '/Users/margaretwm3/Desktop/kmeans.png'
-
+path_to_image = '/Users/ruiqingqiu/Desktop/kmeans.png'
+#path_to_image = '/Users/margaretwm3/Desktop/kmeans.png'
+'''
 # Taking in k clusters, true_center list, and the result center list
 def error_calculate(k,true_center,res):
     error = 0.0
@@ -29,7 +30,7 @@ def error_calculate(k,true_center,res):
         error += min_dis
     print "the error rate is: ", error
     return error
-
+'''
 def plot_graph():
     colors = ([([1,0,0],[0,1,0],[0,0,1])[i] for i in idx])
     # plot colored points
@@ -45,29 +46,38 @@ def plot_graph():
 def init_board(N):
     X = np.array([(random.uniform(-1, 1), random.uniform(-1, 1)) for i in range(N)])
     return X
-
+'''
 def init_board_gauss(N, k):
+    # average number of points needed for each cluster, total points / num of clusters
     n = float(N)/k
     X = []
+    # generate k centers
     for i in range(k):
         c = (random.uniform(-1, 1), random.uniform(-1, 1))
         true_center.append([c[0],c[1]]) # remember the true center to calculate error
+
+        # s measures how big the cluster is
         s = random.uniform(0.05,0.5)
+        # s = 0.05
         x = []
+        # generate points for the cluster until it has n points
         while len(x) < n:
             a, b = np.array([np.random.normal(c[0], s), np.random.normal(c[1], s)])
             # Continue drawing points from the distribution in the range [-1,1]
             if abs(a) < 1 and abs(b) < 1:
                 x.append([a,b])
+        # Put the points into the list
         X.extend(x)
+    # convert the list ot np array type and return
     X = np.array(X)[:N]
     #print true_center
     return X
-    
+'''
 num_of_iteration = 100
 #res, idx = kmeans2(numpy.array(zip(xy[:,0],xy[:,1])),5)
 cluster_number = 3
-dataSet = init_board_gauss(1000,cluster_number)
+data = Data(1000,cluster_number,2)
+dataSet = data.init_board_gauss()
 error_list = []
 index = []
 for i in range(num_of_iteration):
@@ -75,18 +85,18 @@ for i in range(num_of_iteration):
     res, idx = kmeans2(dataSet,3)
     print res
     print idx
-    error_list.append(error_calculate(3,true_center,res))
+    error_list.append(data.error_calculate(res))
     index.append(i)
 error_list2 = []
 if 5 < cluster_number:
     for i in range(num_of_iteration):
         res, idx = kmeans2(dataSet,5)
-        error_list2.append(error_calculate(5,true_center,res))
+        error_list2.append(data.error_calculate(res))
 error_list3 = []
 if 10 < cluster_number:
     for i in range(num_of_iteration):
         res, idx = kmeans2(dataSet,10)
-        error_list3.append(error_calculate(10,true_center,res))
+        error_list3.append(data.error_calculate(res))
 
 
 
