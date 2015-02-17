@@ -99,7 +99,7 @@ if 10 < cluster_number:
         error_list3.append(data.error_calculate(res))
 
 
-
+"""
 #fig = plt.figure()
 #p1 = fig.add_subplot(211)
 plt.plot(error_list)
@@ -111,5 +111,27 @@ plt.plot(error_list3)
 #plt.ylabel("error rate")
 plt.show()
 plot_graph()
+"""
+c = []
+num_of_center = 3
+for j in range(num_of_center):
+    c.append([random.uniform(-1,1),random.uniform(-1,1)])
+s = 0.1
+covariance = [[0.5, 0],[0,0.5]]
+#data_set = data.generate_mult_normal_data(c, covariance, 500)
+
+prob = [0.7, 0.2, 0.1]
+
+data_set = data.generate_mult_normal_based_prob(prob, c, covariance, 500)
+for i in range(num_of_iteration):
+    res, idx = kmeans2(data_set, 3)
+
+colors = ([([1,0,0],[0,1,0],[0,0,1])[i] for i in idx])
+pylab.scatter(data_set[:,0],data_set[:,1], c=colors)
+
+pylab.scatter(res[:,0],res[:,1], marker='o', s = 500, linewidths=2, c='none')
+pylab.scatter(res[:,0],res[:,1], marker='x', s = 500, linewidths=2)
+pylab.savefig(path_to_image)
+
 
 

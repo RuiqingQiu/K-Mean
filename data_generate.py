@@ -19,7 +19,8 @@ class Data(object):
             for j in range(self.p):
                 c = c + (random.uniform(-1,1),)
             self.true_center.append(c)
-            s = random.uniform(0.05,0.5)
+            #s = random.uniform(0.05,0.5)
+            s = 0.1
             x = []
             while len(x) < n:
                 # need to change dimension
@@ -50,7 +51,21 @@ class Data(object):
         print "the error rate is: ", error
         return error
 
+    def generate_mult_normal_data(self, mean, covariance, num_of_samples):
+        return np.random.multivariate_normal(mean,covariance, num_of_samples)
 
-
-
+    # prob is list of probability that sums to 1
+    def generate_mult_normal_based_prob(self, prob, means, covariance, num_of_samples):
+        data_list = []
+        for i in range(num_of_samples):
+            random_num = random.random()
+            sum = 0.0
+            index = -1
+            for p in prob:
+                if random_num < sum:
+                    break
+                sum += p
+                index = index + 1
+            data_list.append(self.generate_mult_normal_data(means[index], covariance,1)[0])
+        return np.array(data_list)[:num_of_samples]
 
