@@ -55,7 +55,8 @@ class Data(object):
 
     def set_true_center(self, means):
         self.true_center = means
-        print self.true_center
+        
+        print "true center is ", self.true_center
 
 
     # mean is a p dimensional vector, covarience is a p*p matrix
