@@ -48,8 +48,12 @@ class Data(object):
                 if dst < min_dis:
                     min_dis = dst
             error += min_dis
-        print "the error rate is: ", error
+        # print "the error rate is: ", error
         return error
+
+    def set_true_center(self, means):
+        self.true_center = means
+        print self.true_center
 
     def generate_mult_normal_data(self, mean, covariance, num_of_samples):
         return np.random.multivariate_normal(mean,covariance, num_of_samples)

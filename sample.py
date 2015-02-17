@@ -42,11 +42,10 @@ def plot_graph():
     pylab.savefig(path_to_image)
 
 
-
+'''
 def init_board(N):
     X = np.array([(random.uniform(-1, 1), random.uniform(-1, 1)) for i in range(N)])
     return X
-'''
 def init_board_gauss(N, k):
     # average number of points needed for each cluster, total points / num of clusters
     n = float(N)/k
@@ -97,7 +96,6 @@ if 10 < cluster_number:
     for i in range(num_of_iteration):
         res, idx = kmeans2(dataSet,10)
         error_list3.append(data.error_calculate(res))
-
 
 """
 #fig = plt.figure()

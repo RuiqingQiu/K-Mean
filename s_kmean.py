@@ -62,8 +62,8 @@ def sequential_kmean(data, k):
         counts[replace_position] = counts[replace_position] + 1
     return np.array(kmean_center), np.array(idx)
 
+'''
 num_of_iteration = 5
-#res, idx = kmeans2(numpy.array(zip(xy[:,0],xy[:,1])),5)
 cluster_number = 3
 d = Data(1000,cluster_number,2)
 dataSet = d.init_board_gauss()
@@ -83,3 +83,4 @@ plt.plot(error_list)
 plt.legend(['s_kmean','kmean'],loc='upper left')
 plt.show()
 #plot_graph()
+'''
