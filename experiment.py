@@ -56,6 +56,7 @@ score = d.error_calculate(res) / (sigma * sigma * p)
 print "kmean score is ", score
 
 
+
 res, idx = sequential_kmean(data_set, k)
 score = d.error_calculate(res) / (sigma * sigma * p)
 print "sequential kmean score is ", score

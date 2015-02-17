@@ -41,8 +41,7 @@ def plot_graph():
     pylab.scatter(res[:,0],res[:,1], marker='x', s = 500, linewidths=2)
     pylab.savefig(path_to_image)
 
-
-'''
+"""
 def init_board(N):
     X = np.array([(random.uniform(-1, 1), random.uniform(-1, 1)) for i in range(N)])
     return X
@@ -71,7 +70,7 @@ def init_board_gauss(N, k):
     X = np.array(X)[:N]
     #print true_center
     return X
-'''
+"""
 num_of_iteration = 100
 #res, idx = kmeans2(numpy.array(zip(xy[:,0],xy[:,1])),5)
 cluster_number = 3
@@ -80,10 +79,10 @@ dataSet = data.init_board_gauss()
 error_list = []
 index = []
 for i in range(num_of_iteration):
-    print dataSet
+    #print dataSet
     res, idx = kmeans2(dataSet,3)
-    print res
-    print idx
+    #print res
+    #print idx
     error_list.append(data.error_calculate(res))
     index.append(i)
 error_list2 = []
@@ -132,4 +131,5 @@ pylab.scatter(res[:,0],res[:,1], marker='x', s = 500, linewidths=2)
 pylab.savefig(path_to_image)
 
 
+pylab.show()
 
