@@ -75,7 +75,7 @@ class MNIST(object):
         assert len(train_img) == len(train_label)
         assert len(train_img) == 60000
         #print 'Showing num:%d' % train_label[index]
-        #print self.display(train_img[index])
+        print self.display(train_img[index])
         #print
         return True
 
@@ -100,9 +100,11 @@ if __name__ == "__main__":
     print len(mn.train_images[0])
     X = np.array(mn.train_images)
     print X
+    '''
     res, idx = kmeans2(X,10)
     error = 0
     for i in range(0,60000):
         if idx[i] != mn.train_label[i]:
             error = error + 1
     print "error is " + error
+    '''
