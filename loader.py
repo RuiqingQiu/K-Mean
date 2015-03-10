@@ -99,12 +99,9 @@ if __name__ == "__main__":
     #print mn.train_images
     print len(mn.train_images[0])
     X = np.array(mn.train_images)
-    print X
-    '''
     res, idx = kmeans2(X,10)
     error = 0
     for i in range(0,60000):
         if idx[i] != mn.train_label[i]:
             error = error + 1
     print "error is " + error
-    '''
